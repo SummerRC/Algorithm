@@ -4,6 +4,7 @@ import base.quarterSecond.SelectSort;
 import base.quarterThird.MergeSort;
 import base.quarterThird.MergeSortBU;
 import base.quarterThird.QuickSort;
+import base.quarterThird.QuickSortTwoWay;
 import other.IntToString;
 import other.IsPrime;
 import utils.ArrayUtils;
@@ -15,7 +16,7 @@ public class AlgorithmTest<T extends Comparable<? super T>> {
         AlgorithmTest<Integer> test = new AlgorithmTest<>();
 
         Integer array[] = TestUtils.getRandomArray(400, 10000);
-        Integer nearlyOrderedArray[] = TestUtils.getRandomArray(50000, 10);
+        Integer nearlyOrderedArray[] = TestUtils.getRandomArray(10000, 10);
         array = nearlyOrderedArray;
         System.out.println("数组排序前为: ");
         System.out.println("数组排序前为: ");
@@ -48,6 +49,9 @@ public class AlgorithmTest<T extends Comparable<? super T>> {
         //优化后的快速并排序
         Integer[] copyArrayForOQS = ArrayUtils.copyArray(array, Integer.class);
         test.testOptimizedQuickSort(copyArrayForOQS);
+        //二路快排
+        Integer[] copyArrayForQSTwo = ArrayUtils.copyArray(array, Integer.class);
+        test.testQuickSortTwoWay(copyArrayForQSTwo);
     }
 
 
@@ -166,6 +170,21 @@ public class AlgorithmTest<T extends Comparable<? super T>> {
         sort.sort(array);
         long timeUsed = System.nanoTime() - timeBeforeSort;
         System.out.println("快速排序: " + (timeUsed / 1000000.0f) + "ms");
+        System.out.print("数组排序后为: ");
+        ArrayUtils.printArray(array, 10);
+        assert ArrayUtils.isSorted(array) : "数组无序";
+    }
+
+    /**
+     * 测试二路快排
+     */
+    private void testQuickSortTwoWay(T[] array) {
+        System.out.println();
+        Sort<T> sort = new QuickSortTwoWay<>();
+        long timeBeforeSort = System.nanoTime();
+        sort.sort(array);
+        long timeUsed = System.nanoTime() - timeBeforeSort;
+        System.out.println("二路快排: " + (timeUsed / 1000000.0f) + "ms");
         System.out.print("数组排序后为: ");
         ArrayUtils.printArray(array, 10);
         assert ArrayUtils.isSorted(array) : "数组无序";

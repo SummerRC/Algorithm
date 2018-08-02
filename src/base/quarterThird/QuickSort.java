@@ -13,6 +13,9 @@ import java.util.Random;
  *              上述过程，知道数组完全有序
  *      优化：   1. 在元素少的时候采用插入排序
  *              2. 针对近乎有序的数组进行优化（数组近乎有序的情况下，生成的递归树不平衡，很可能比logn要高）
+ *      思考：   就算经过上述两步优化，快排的这种实现依然无法保证生成的递归树平衡（在重复元素较多的情况下，
+ *              等于标兵v的元素要么全在左边、要么全在右边，从而使得左右两部分元素数相差大），我们可以采用
+ *              两路排序和三路排序解决上述问题
  */
 public class QuickSort<T extends Comparable<? super T>> extends Sort<T> {
 
@@ -29,9 +32,7 @@ public class QuickSort<T extends Comparable<? super T>> extends Sort<T> {
      * [j+1, right]的元素都大于V
      */
     private void quickSort(T[] array, int left, int right) {
-        if (right - left < 15) {
-            InsertSort<T> sort = new InsertSort<>();
-            sort.sort(array, left, right);
+        if (left >= right) {
             return;
         }
         int p = partition(array, left, right);
