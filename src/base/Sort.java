@@ -14,5 +14,13 @@ public abstract class Sort<T extends Comparable<? super T>> {
         this.mType = type;
     }
 
+    /**
+     * 未优化的排序算法
+     */
     public abstract void sort(T[] array);
+
+    /**
+     * 优化的排序算法
+     */
+    public abstract void optimizedSort(T[] array);
 }

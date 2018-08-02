@@ -29,4 +29,9 @@ public class SelectSort<T extends Comparable<? super T>> extends Sort<T> {
             ArrayUtils.swipe(array, i, minValuePosition);
         }
     }
+
+    @Override
+    public void optimizedSort(T[] array) {
+
+    }
 }

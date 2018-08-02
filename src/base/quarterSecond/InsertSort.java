@@ -30,10 +30,8 @@ public class InsertSort<T extends Comparable<? super T>> extends Sort<T> {
         }
     }
 
-    /**
-     * 优化的插入排序算法
-     */
-    public void optimizeSort(T[] array) {
+    @Override
+    public void optimizedSort(T[] array) {
         if (array == null || array.length <= 1) {
             return;
         }
