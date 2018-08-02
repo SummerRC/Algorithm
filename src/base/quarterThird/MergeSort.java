@@ -7,11 +7,11 @@ import java.lang.reflect.Array;
 
 /**
  * Created by SummerRC on 18/8/1.
- * Description: 归并排序(自上而下的实现)
- * 算法思想: 将待排序数组分成左右两部分, 然后将左右两部分再两两划分, 直到划分成最小的元素个数,
- * 然后再依次两两归并成有序数组,直到数组完全有序.
- * 时间复杂度: logn次归并 * 每次时间复杂度n = O(nlogn)
- * 空间复杂度: n (任意时刻只需要一个临时数组)
+ * Description: 归并排序(自上而下的递归实现)
+ *      算法思想: 将待排序数组分成左右两部分, 然后将左右两部分再两两划分, 直到划分成最小的元素个数,
+ *          然后再依次两两归并成有序数组,直到数组完全有序.
+ *      时间复杂度: logn次归并 * 每次时间复杂度n = O(nlogn)
+ *      空间复杂度: n (任意时刻只需要一个临时数组)
  */
 public class MergeSort<T extends Comparable<? super T>> extends Sort<T> {
 
@@ -42,7 +42,7 @@ public class MergeSort<T extends Comparable<? super T>> extends Sort<T> {
         int middle = (left + right) / 2;
         mergeSort(array, left, middle);
         mergeSort(array, middle + 1, right);
-        merge(array, middle, left, right);
+        merge(array, left, middle, right);
     }
 
 
@@ -63,13 +63,13 @@ public class MergeSort<T extends Comparable<? super T>> extends Sort<T> {
         optimizedMergeSort(array, middle + 1, right);
 
         if (array[middle].compareTo(array[middle + 1]) > 0) {      // 只有归并之后的左半部分有大于右半部分的元素,才进行merge操作
-            merge(array, middle, left, right);
+            merge(array, left, middle, right);
         }
     }
 
 
     @SuppressWarnings("unchecked")
-    private void merge(T[] array, int middle, int left, int right) {
+    public void merge(T[] array, int left, int middle, int right) {
         //开辟一块新的内存空间存储数组元素
         T[] tmpArray = (T[]) Array.newInstance(mType, right - left + 1);
         for (int i = left; i <= right; i++) {
@@ -79,7 +79,7 @@ public class MergeSort<T extends Comparable<? super T>> extends Sort<T> {
         int i = left;
         int j = middle + 1;
         while (position <= right) {
-            if (i <= middle && j <= right) {        //左右两部分均还有值的情况
+           if (i <= middle && j <= right) {        //左右两部分均还有值的情况
                 if (tmpArray[i - left].compareTo(tmpArray[j - left]) <= 0) {
                     array[position] = tmpArray[i - left];
                     i++;

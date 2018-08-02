@@ -2,6 +2,7 @@ import base.Sort;
 import base.quarterSecond.InsertSort;
 import base.quarterSecond.SelectSort;
 import base.quarterThird.MergeSort;
+import base.quarterThird.MergeSortBU;
 import other.IntToString;
 import other.IsPrime;
 import utils.ArrayUtils;
@@ -13,7 +14,7 @@ public class AlgorithmTest<T extends Comparable<? super T>> {
         AlgorithmTest<Integer> test = new AlgorithmTest<>();
 
         Integer array[] = TestUtils.getRandomArray(400, 10000);
-//        Integer nearlyOrderedArray[] = TestUtils.getRandomArray(50000, 1);
+//        Integer nearlyOrderedArray[] = TestUtils.getRandomArray(50000, 10);
 //        array = nearlyOrderedArray;
         System.out.println("数组排序前为: ");
         System.out.println("数组排序前为: ");
@@ -34,7 +35,14 @@ public class AlgorithmTest<T extends Comparable<? super T>> {
         //优化后的归并排序
         Integer[] copyArrayForOMS = ArrayUtils.copyArray(array, Integer.class);
         test.testOptimizedMergeSort(copyArrayForOMS, Integer.class);
+        //自下而上的非递归的归并排序
+        Integer[] copyArrayForMSBU = ArrayUtils.copyArray(array, Integer.class);
+        test.testMergeSortBU(copyArrayForMSBU, Integer.class);
+        //优化后的自下而上的非递归的归并排序
+        Integer[] copyArrayForOMSBU = ArrayUtils.copyArray(array, Integer.class);
+        test.testOptimizedMergeSortBU(copyArrayForOMSBU, Integer.class);
     }
+
 
     /**
      * 测试选择排序算法
@@ -85,7 +93,7 @@ public class AlgorithmTest<T extends Comparable<? super T>> {
     }
 
     /**
-     * 测试归并排序算法
+     * 测试归并排序算法(自上而下的递归实现)
      */
     private void testMergeSort(T[] array, Class<T> type) {
         System.out.println();
@@ -101,12 +109,44 @@ public class AlgorithmTest<T extends Comparable<? super T>> {
     }
 
     /**
-     * 测试归并排序算法
+     * 测试归并排序算法(自上而下的递归实现)
      */
     private void testOptimizedMergeSort(T[] array, Class<T> type) {
         System.out.println();
         System.out.println("测试优化后的归并排序算法: ");
         Sort<T> sort = new MergeSort<>(type);
+        long timeBeforeSort = System.nanoTime();
+        sort.optimizedSort(array);
+        long timeUsed = System.nanoTime() - timeBeforeSort;
+        System.out.println("数组排序后为: ");
+        ArrayUtils.printArray(array);
+        assert ArrayUtils.isSorted(array) : "数组无序";
+        System.out.println("算法用时: " + (timeUsed / 1000000.0f) + "ms");
+    }
+
+    /**
+     * 测试归并排序算法(自下而上的非递归实现)
+     */
+    private void testMergeSortBU(T[] array, Class<T> type) {
+        System.out.println();
+        System.out.println("测试自下而上的非递归实现的归并排序算法: ");
+        Sort<T> sort = new MergeSortBU<>(type);
+        long timeBeforeSort = System.nanoTime();
+        sort.sort(array);
+        long timeUsed = System.nanoTime() - timeBeforeSort;
+        System.out.println("数组排序后为: ");
+        ArrayUtils.printArray(array);
+        assert ArrayUtils.isSorted(array) : "数组无序";
+        System.out.println("算法用时: " + (timeUsed / 1000000.0f) + "ms");
+    }
+
+    /**
+     * 测试优化后的归并排序算法(自下而上的非递归实现)
+     */
+    private void testOptimizedMergeSortBU(T[] array, Class<T> type) {
+        System.out.println();
+        System.out.println("测试优化后的自下而上的非递归实现的归并排序算法: ");
+        Sort<T> sort = new MergeSortBU<>(type);
         long timeBeforeSort = System.nanoTime();
         sort.optimizedSort(array);
         long timeUsed = System.nanoTime() - timeBeforeSort;
