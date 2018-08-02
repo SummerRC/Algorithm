@@ -39,7 +39,7 @@ public class TestUtils {
         for (int i=0; i<swapTimes; i++) {
             int posX = random.nextInt(length);
             int posY = random.nextInt(length);
-            ArrayUtils.swipe(array, posX, posY);
+            ArrayUtils.swap(array, posX, posY);
         }
         return array;
     }

@@ -26,7 +26,7 @@ public class SelectSort<T extends Comparable<? super T>> extends Sort<T> {
                     minValuePosition = j;
                 }
             }
-            ArrayUtils.swipe(array, i, minValuePosition);
+            ArrayUtils.swap(array, i, minValuePosition);
         }
     }
 

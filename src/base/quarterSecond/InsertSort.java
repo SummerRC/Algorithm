@@ -22,7 +22,7 @@ public class InsertSort<T extends Comparable<? super T>> extends Sort<T> {
             //寻找array[i]在区间[0, i]合适的插入位置
             for (int j = i; j > 0; j--) {
                 if (array[j].compareTo(array[j - 1]) < 0) {
-                    ArrayUtils.swipe(array, j, j - 1);
+                    ArrayUtils.swap(array, j, j - 1);
                 } else {
                     break;
                 }
@@ -64,7 +64,7 @@ public class InsertSort<T extends Comparable<? super T>> extends Sort<T> {
             //寻找array[i]在区间[left, i]合适的插入位置
             for (int j = i; j > left; j--) {
                 if (array[j].compareTo(array[j - 1]) < 0) {
-                    ArrayUtils.swipe(array, j, j - 1);
+                    ArrayUtils.swap(array, j, j - 1);
                 } else {
                     break;
                 }

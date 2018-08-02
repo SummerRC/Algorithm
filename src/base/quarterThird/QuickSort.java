@@ -37,15 +37,18 @@ public class QuickSort<T extends Comparable<? super T>> extends Sort<T> {
      * @return  返回数组元素下标p, 使得 array[left...p-1]<=array[p] ; array[p+1...right] > array[p]
      */
     private int partition(T[] array, int left, int right) {
-        int p = left;
+        T v = array[left];
+
+        //array[left+1...j] <= v ; array[j+1...i) > v
+        int j = left;
         for (int i=left+1; i<=right; i++) {
-            if (array[i].compareTo(array[left]) <= 0) {
-                p++;
-                ArrayUtils.swipe(array, p, i);
+            if (array[i].compareTo(v) <= 0) {
+                j++;
+                ArrayUtils.swap(array, i, j);
             }
         }
-        ArrayUtils.swipe(array, left, p);
-        return p;
+        ArrayUtils.swap(array, left, j);
+        return j;
     }
 
     @Override

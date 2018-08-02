@@ -11,7 +11,7 @@ public class ArrayUtils {
     /**
      * 交换数组下标为 i 和 j 的两个元素的位置
      */
-    public static <T extends Comparable<? super T>> void swipe(T array[], int i, int j) {
+    public static <T extends Comparable<? super T>> void swap(T array[], int i, int j) {
         if (array == null) {
             throw new RuntimeException("数组 array 为空!");
         }
@@ -34,6 +34,21 @@ public class ArrayUtils {
         for (T i : array) {
             System.out.print(i + " ");
         }
+        System.out.println();
+    }
+
+    /**
+     * 打印数组前n个元素
+     */
+    public static <T extends Comparable<? super T>> void printArray(T array[], int n) {
+        if (array == null || array.length == 0) {
+            System.out.println("数组为空");
+            return;
+        }
+        for (int i=0; i<array.length && i<n; i++) {
+            System.out.print(i + " ");
+        }
+        System.out.print("... ");
         System.out.println();
     }
 
