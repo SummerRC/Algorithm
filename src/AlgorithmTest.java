@@ -3,6 +3,7 @@ import base.quarterSecond.InsertSort;
 import base.quarterSecond.SelectSort;
 import base.quarterThird.MergeSort;
 import base.quarterThird.MergeSortBU;
+import base.quarterThird.QuickSort;
 import other.IntToString;
 import other.IsPrime;
 import utils.ArrayUtils;
@@ -41,6 +42,9 @@ public class AlgorithmTest<T extends Comparable<? super T>> {
         //优化后的自下而上的非递归的归并排序
         Integer[] copyArrayForOMSBU = ArrayUtils.copyArray(array, Integer.class);
         test.testOptimizedMergeSortBU(copyArrayForOMSBU, Integer.class);
+        //快速并排序
+        Integer[] copyArrayForQS = ArrayUtils.copyArray(array, Integer.class);
+        test.testQuickSort(copyArrayForQS);
     }
 
 
@@ -149,6 +153,22 @@ public class AlgorithmTest<T extends Comparable<? super T>> {
         Sort<T> sort = new MergeSortBU<>(type);
         long timeBeforeSort = System.nanoTime();
         sort.optimizedSort(array);
+        long timeUsed = System.nanoTime() - timeBeforeSort;
+        System.out.println("数组排序后为: ");
+        ArrayUtils.printArray(array);
+        assert ArrayUtils.isSorted(array) : "数组无序";
+        System.out.println("算法用时: " + (timeUsed / 1000000.0f) + "ms");
+    }
+
+    /**
+     * 测试快速排序算法
+     */
+    private void testQuickSort(T[] array) {
+        System.out.println();
+        System.out.println("测试快速排序算法: ");
+        Sort<T> sort = new QuickSort<>();
+        long timeBeforeSort = System.nanoTime();
+        sort.sort(array);
         long timeUsed = System.nanoTime() - timeBeforeSort;
         System.out.println("数组排序后为: ");
         ArrayUtils.printArray(array);
