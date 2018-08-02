@@ -15,8 +15,8 @@ public class AlgorithmTest<T extends Comparable<? super T>> {
         AlgorithmTest<Integer> test = new AlgorithmTest<>();
 
         Integer array[] = TestUtils.getRandomArray(400, 10000);
-//        Integer nearlyOrderedArray[] = TestUtils.getRandomArray(50000, 10);
-//        array = nearlyOrderedArray;
+        Integer nearlyOrderedArray[] = TestUtils.getRandomArray(50000, 10);
+        array = nearlyOrderedArray;
         System.out.println("数组排序前为: ");
         System.out.println("数组排序前为: ");
         ArrayUtils.printArray(array);
@@ -45,6 +45,9 @@ public class AlgorithmTest<T extends Comparable<? super T>> {
         //快速并排序
         Integer[] copyArrayForQS = ArrayUtils.copyArray(array, Integer.class);
         test.testQuickSort(copyArrayForQS);
+        //优化后的快速并排序
+        Integer[] copyArrayForOQS = ArrayUtils.copyArray(array, Integer.class);
+        test.testOptimizedQuickSort(copyArrayForOQS);
     }
 
 
@@ -163,6 +166,21 @@ public class AlgorithmTest<T extends Comparable<? super T>> {
         sort.sort(array);
         long timeUsed = System.nanoTime() - timeBeforeSort;
         System.out.println("快速排序: " + (timeUsed / 1000000.0f) + "ms");
+        System.out.print("数组排序后为: ");
+        ArrayUtils.printArray(array, 10);
+        assert ArrayUtils.isSorted(array) : "数组无序";
+    }
+
+    /**
+     * 测试优化后的快速排序算法
+     */
+    private void testOptimizedQuickSort(T[] array) {
+        System.out.println();
+        Sort<T> sort = new QuickSort<>();
+        long timeBeforeSort = System.nanoTime();
+        sort.optimizedSort(array);
+        long timeUsed = System.nanoTime() - timeBeforeSort;
+        System.out.println("优化后的快速排序: " + (timeUsed / 1000000.0f) + "ms");
         System.out.print("数组排序后为: ");
         ArrayUtils.printArray(array, 10);
         assert ArrayUtils.isSorted(array) : "数组无序";
