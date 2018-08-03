@@ -1,10 +1,7 @@
 import base.Sort;
 import base.quarterSecond.InsertSort;
 import base.quarterSecond.SelectSort;
-import base.quarterThird.MergeSort;
-import base.quarterThird.MergeSortBU;
-import base.quarterThird.QuickSort;
-import base.quarterThird.QuickSortTwoWay;
+import base.quarterThird.*;
 import other.IntToString;
 import other.IsPrime;
 import utils.ArrayUtils;
@@ -52,6 +49,9 @@ public class AlgorithmTest<T extends Comparable<? super T>> {
         //二路快排
         Integer[] copyArrayForQSTwo = ArrayUtils.copyArray(array, Integer.class);
         test.testQuickSortTwoWay(copyArrayForQSTwo);
+        //三路快排
+        Integer[] copyArrayForQSThree = ArrayUtils.copyArray(array, Integer.class);
+        test.testQuickSortThreeWay(copyArrayForQSThree);
     }
 
 
@@ -185,6 +185,21 @@ public class AlgorithmTest<T extends Comparable<? super T>> {
         sort.sort(array);
         long timeUsed = System.nanoTime() - timeBeforeSort;
         System.out.println("二路快排: " + (timeUsed / 1000000.0f) + "ms");
+        System.out.print("数组排序后为: ");
+        ArrayUtils.printArray(array, 10);
+        assert ArrayUtils.isSorted(array) : "数组无序";
+    }
+
+    /**
+     * 测试三路快排
+     */
+    private void testQuickSortThreeWay(T[] array) {
+        System.out.println();
+        Sort<T> sort = new QuickSortThreeWay<>();
+        long timeBeforeSort = System.nanoTime();
+        sort.sort(array);
+        long timeUsed = System.nanoTime() - timeBeforeSort;
+        System.out.println("三路快排: " + (timeUsed / 1000000.0f) + "ms");
         System.out.print("数组排序后为: ");
         ArrayUtils.printArray(array, 10);
         assert ArrayUtils.isSorted(array) : "数组无序";
