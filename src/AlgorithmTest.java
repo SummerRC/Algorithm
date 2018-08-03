@@ -56,6 +56,9 @@ public class AlgorithmTest<T extends Comparable<? super T>> {
         //堆排序
         Integer[] copyArrayForHS = ArrayUtils.copyArray(array);
         test.testHeapSort(copyArrayForHS);
+        //优化后的堆排序
+        Integer[] copyArrayForOHS = ArrayUtils.copyArray(array);
+        test.testOptimizedHeapSort(copyArrayForOHS);
     }
 
 
@@ -234,6 +237,21 @@ public class AlgorithmTest<T extends Comparable<? super T>> {
         sort.sort(array);
         long timeUsed = System.nanoTime() - timeBeforeSort;
         System.out.println("堆排序: " + (timeUsed / 1000000.0f) + "ms");
+        System.out.print("数组排序后为: ");
+        ArrayUtils.printArray(array, 10);
+        assert ArrayUtils.isSorted(array) : "数组无序";
+    }
+
+    /**
+     * 测试优化后的堆排序
+     */
+    private void testOptimizedHeapSort(T[] array) {
+        System.out.println();
+        Sort<T> sort = new HeapSort<>();
+        long timeBeforeSort = System.nanoTime();
+        sort.optimizedSort(array);
+        long timeUsed = System.nanoTime() - timeBeforeSort;
+        System.out.println("优化后的堆排序: " + (timeUsed / 1000000.0f) + "ms");
         System.out.print("数组排序后为: ");
         ArrayUtils.printArray(array, 10);
         assert ArrayUtils.isSorted(array) : "数组无序";
