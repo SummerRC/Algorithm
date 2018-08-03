@@ -55,13 +55,13 @@ public class ArrayUtils {
     /**
      * 浅层拷贝一份数组
      */
-    public static <T extends Comparable<? super T>> T[] copyArray(T array[], Class<T> type) {
+    public static <T extends Comparable<? super T>> T[] copyArray(T array[]) {
         if (array == null || array.length == 0) {
             System.out.println("数组为空");
             return array;
         }
         @SuppressWarnings("unchecked")
-        T[] newArray = (T[]) Array.newInstance(type, array.length);
+        T[] newArray = (T[]) Array.newInstance(array[0].getClass(), array.length);
         for (int i = 0; i < array.length; i++) {
             newArray[i] = array[i];
         }
