@@ -14,11 +14,11 @@ public class MaxHeap<T extends Comparable<? super T>> {
     private int mCount;     //堆中元素的个数
 
     /**
-     * @param capacity      堆的容量
      * @param type          具体数据类型
+     * @param capacity      堆的容量
      */
     @SuppressWarnings("unchecked")
-    public MaxHeap(int capacity, Class<T> type) {
+    public MaxHeap(Class<T> type, int capacity) {
         mCapacity = capacity;
         mData = (T[]) Array.newInstance(type, mCapacity + 1);
         mCount = 0;
@@ -111,7 +111,7 @@ public class MaxHeap<T extends Comparable<? super T>> {
     }
 
     public static void main(String[] args)  {
-        MaxHeap<Integer> heap = new MaxHeap<>(10, Integer.class);
+        MaxHeap<Integer> heap = new MaxHeap<>(Integer.class, 10);
         System.out.println("测试向堆中插入元素: ");
         for (int i=1; i<=10; i++) {
             heap.insert(i);

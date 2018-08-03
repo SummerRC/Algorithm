@@ -1,4 +1,5 @@
 import base.Sort;
+import base.quarterFourth.HeapSort;
 import base.quarterSecond.InsertSort;
 import base.quarterSecond.SelectSort;
 import base.quarterThird.*;
@@ -52,6 +53,9 @@ public class AlgorithmTest<T extends Comparable<? super T>> {
         //三路快排
         Integer[] copyArrayForQSThree = ArrayUtils.copyArray(array);
         test.testQuickSortThreeWay(copyArrayForQSThree);
+        //堆排序
+        Integer[] copyArrayForHS = ArrayUtils.copyArray(array);
+        test.testHeapSort(copyArrayForHS);
     }
 
 
@@ -176,6 +180,21 @@ public class AlgorithmTest<T extends Comparable<? super T>> {
     }
 
     /**
+     * 测试优化后的快速排序算法
+     */
+    private void testOptimizedQuickSort(T[] array) {
+        System.out.println();
+        Sort<T> sort = new QuickSort<>();
+        long timeBeforeSort = System.nanoTime();
+        sort.optimizedSort(array);
+        long timeUsed = System.nanoTime() - timeBeforeSort;
+        System.out.println("优化后的快速排序: " + (timeUsed / 1000000.0f) + "ms");
+        System.out.print("数组排序后为: ");
+        ArrayUtils.printArray(array, 10);
+        assert ArrayUtils.isSorted(array) : "数组无序";
+    }
+
+    /**
      * 测试二路快排
      */
     private void testQuickSortTwoWay(T[] array) {
@@ -206,15 +225,15 @@ public class AlgorithmTest<T extends Comparable<? super T>> {
     }
 
     /**
-     * 测试优化后的快速排序算法
+     * 测试堆排序
      */
-    private void testOptimizedQuickSort(T[] array) {
+    private void testHeapSort(T[] array) {
         System.out.println();
-        Sort<T> sort = new QuickSort<>();
+        Sort<T> sort = new HeapSort<>();
         long timeBeforeSort = System.nanoTime();
-        sort.optimizedSort(array);
+        sort.sort(array);
         long timeUsed = System.nanoTime() - timeBeforeSort;
-        System.out.println("优化后的快速排序: " + (timeUsed / 1000000.0f) + "ms");
+        System.out.println("堆排序: " + (timeUsed / 1000000.0f) + "ms");
         System.out.print("数组排序后为: ");
         ArrayUtils.printArray(array, 10);
         assert ArrayUtils.isSorted(array) : "数组无序";
