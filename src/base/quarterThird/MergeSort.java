@@ -15,10 +15,6 @@ import java.lang.reflect.Array;
  */
 public class MergeSort<T extends Comparable<? super T>> extends Sort<T> {
 
-    public MergeSort(Class<T> type) {
-        super(type);
-    }
-
     @Override
     public void sort(T[] array) {
         if (array == null || array.length <= 1) {
@@ -71,7 +67,7 @@ public class MergeSort<T extends Comparable<? super T>> extends Sort<T> {
     @SuppressWarnings("unchecked")
     public void merge(T[] array, int left, int middle, int right) {
         //开辟一块新的内存空间存储数组元素
-        T[] tmpArray = (T[]) Array.newInstance(mType, right - left + 1);
+        T[] tmpArray = (T[]) Array.newInstance(array[left].getClass(), right - left + 1);
         for (int i = left; i <= right; i++) {
             tmpArray[i - left] = array[i];
         }

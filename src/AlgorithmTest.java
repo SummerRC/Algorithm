@@ -20,37 +20,37 @@ public class AlgorithmTest<T extends Comparable<? super T>> {
         ArrayUtils.printArray(array);
 
         //选择排序
-        Integer[] copyArrayForSS = ArrayUtils.copyArray(array, Integer.class);
+        Integer[] copyArrayForSS = ArrayUtils.copyArray(array);
         test.testSelectSort(copyArrayForSS);
         //插入排序
-        Integer[] copyArrayForIS = ArrayUtils.copyArray(array, Integer.class);
+        Integer[] copyArrayForIS = ArrayUtils.copyArray(array);
         test.testInsertSort(copyArrayForIS);
         //优化后的插入排序
-        Integer[] copyArrayForOIS = ArrayUtils.copyArray(array, Integer.class);
+        Integer[] copyArrayForOIS = ArrayUtils.copyArray(array);
         test.testOptimizedInsertSort(copyArrayForOIS);
         //归并排序
-        Integer[] copyArrayForMS = ArrayUtils.copyArray(array, Integer.class);
-        test.testMergeSort(copyArrayForMS, Integer.class);
+        Integer[] copyArrayForMS = ArrayUtils.copyArray(array);
+        test.testMergeSort(copyArrayForMS);
         //优化后的归并排序
-        Integer[] copyArrayForOMS = ArrayUtils.copyArray(array, Integer.class);
-        test.testOptimizedMergeSort(copyArrayForOMS, Integer.class);
+        Integer[] copyArrayForOMS = ArrayUtils.copyArray(array);
+        test.testOptimizedMergeSort(copyArrayForOMS);
         //自下而上的非递归的归并排序
-        Integer[] copyArrayForMSBU = ArrayUtils.copyArray(array, Integer.class);
-        test.testMergeSortBU(copyArrayForMSBU, Integer.class);
+        Integer[] copyArrayForMSBU = ArrayUtils.copyArray(array);
+        test.testMergeSortBU(copyArrayForMSBU);
         //优化后的自下而上的非递归的归并排序
-        Integer[] copyArrayForOMSBU = ArrayUtils.copyArray(array, Integer.class);
-        test.testOptimizedMergeSortBU(copyArrayForOMSBU, Integer.class);
+        Integer[] copyArrayForOMSBU = ArrayUtils.copyArray(array);
+        test.testOptimizedMergeSortBU(copyArrayForOMSBU);
         //快速并排序
-        Integer[] copyArrayForQS = ArrayUtils.copyArray(array, Integer.class);
+        Integer[] copyArrayForQS = ArrayUtils.copyArray(array);
         test.testQuickSort(copyArrayForQS);
         //优化后的快速并排序
-        Integer[] copyArrayForOQS = ArrayUtils.copyArray(array, Integer.class);
+        Integer[] copyArrayForOQS = ArrayUtils.copyArray(array);
         test.testOptimizedQuickSort(copyArrayForOQS);
         //二路快排
-        Integer[] copyArrayForQSTwo = ArrayUtils.copyArray(array, Integer.class);
+        Integer[] copyArrayForQSTwo = ArrayUtils.copyArray(array);
         test.testQuickSortTwoWay(copyArrayForQSTwo);
         //三路快排
-        Integer[] copyArrayForQSThree = ArrayUtils.copyArray(array, Integer.class);
+        Integer[] copyArrayForQSThree = ArrayUtils.copyArray(array);
         test.testQuickSortThreeWay(copyArrayForQSThree);
     }
 
@@ -103,9 +103,9 @@ public class AlgorithmTest<T extends Comparable<? super T>> {
     /**
      * 测试归并排序算法(自上而下的递归实现)
      */
-    private void testMergeSort(T[] array, Class<T> type) {
+    private void testMergeSort(T[] array) {
         System.out.println();
-        Sort<T> sort = new MergeSort<>(type);
+        Sort<T> sort = new MergeSort<>();
         long timeBeforeSort = System.nanoTime();
         sort.sort(array);
         long timeUsed = System.nanoTime() - timeBeforeSort;
@@ -118,9 +118,9 @@ public class AlgorithmTest<T extends Comparable<? super T>> {
     /**
      * 测试归并排序算法(自上而下的递归实现)
      */
-    private void testOptimizedMergeSort(T[] array, Class<T> type) {
+    private void testOptimizedMergeSort(T[] array) {
         System.out.println();
-        Sort<T> sort = new MergeSort<>(type);
+        Sort<T> sort = new MergeSort<>();
         long timeBeforeSort = System.nanoTime();
         sort.optimizedSort(array);
         long timeUsed = System.nanoTime() - timeBeforeSort;
@@ -133,9 +133,9 @@ public class AlgorithmTest<T extends Comparable<? super T>> {
     /**
      * 测试归并排序算法(自下而上的非递归实现)
      */
-    private void testMergeSortBU(T[] array, Class<T> type) {
+    private void testMergeSortBU(T[] array) {
         System.out.println();
-        Sort<T> sort = new MergeSortBU<>(type);
+        Sort<T> sort = new MergeSortBU<>();
         long timeBeforeSort = System.nanoTime();
         sort.sort(array);
         long timeUsed = System.nanoTime() - timeBeforeSort;
@@ -148,9 +148,9 @@ public class AlgorithmTest<T extends Comparable<? super T>> {
     /**
      * 测试优化后的归并排序算法(自下而上的非递归实现)
      */
-    private void testOptimizedMergeSortBU(T[] array, Class<T> type) {
+    private void testOptimizedMergeSortBU(T[] array) {
         System.out.println();
-        Sort<T> sort = new MergeSortBU<>(type);
+        Sort<T> sort = new MergeSortBU<>();
         long timeBeforeSort = System.nanoTime();
         sort.optimizedSort(array);
         long timeUsed = System.nanoTime() - timeBeforeSort;

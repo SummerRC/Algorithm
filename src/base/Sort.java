@@ -6,13 +6,7 @@ package base;
  */
 public abstract class Sort<T extends Comparable<? super T>> {
 
-    protected Class<T> mType;
-
     public Sort() {}
-
-    public Sort(Class<T> type) {
-        this.mType = type;
-    }
 
     /**
      * 未优化的排序算法

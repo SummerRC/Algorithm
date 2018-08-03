@@ -11,10 +11,6 @@ import base.quarterSecond.InsertSort;
  */
 public class MergeSortBU<T extends Comparable<? super T>> extends MergeSort<T> {
 
-    public MergeSortBU(Class<T> type) {
-        super(type);
-    }
-
     @Override
     public void sort(T[] array) {
         if (array == null || array.length <= 1) {
