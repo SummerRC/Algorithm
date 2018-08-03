@@ -9,6 +9,7 @@ import utils.ArrayUtils;
  *      算法思想:将一个元素插入到已排序数组中, 使已排序数组继续有序, 重复上述过程, 直到数组完全有序
  *      思考:
  *          插入排序在找到合适的位置时算法就停止了,所以在数组近乎有序的情况下,效率极高,甚至优于O(nlogn)的算法
+ *      注：Comparable<? super T> 表示可以采用父类方法比较子类型，这里直接用Comparable<T>也可以
  */
 public class InsertSort<T extends Comparable<? super T>> extends Sort<T> {
 
